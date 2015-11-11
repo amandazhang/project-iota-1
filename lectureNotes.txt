@@ -128,8 +128,47 @@ Lecture 15 Testing a single voxel
 1. Matrix rank
 2. Testing a single voxel:
    step 1: Modeling a single voxel time course.
+           #voxel_time_course = data[42, 32, 19]
    step 2: compile a design for this time-course and estimate it.
            #convolved = np.loadtxt('ds-conv.txt')[4:]
            X = np.ones((len(convolved), 2)
            X[:, 0] = convolved
+           OUR MODEL: Y = X*beta + epsilon
+           import numpy.linalg as npl
+           Xp = npl.pinv(X)
+           beta_hat = Xp.dot(voxel_time_course)
+   step 3: Do a hypothesis test on our beta_hat values
+           Use an estimate S quare of sigma square to give us estimated sd
+           of the variance covariance:
+           #y = voxel_time_course
+           y_hat = X.dot(beta_hat)
+           residuals = y-y_hat
+           RSS = np.sum(residuals**2)
+           df = X.shape[0] - npl.matrix_rank(X)
+           MRSS = RSS/df
+           S square = MRSS
 
+           Now the standard estimate of the variance/covariance of the beta_hat:
+           Remember that the formula:
+           cov(beta_hat) = sigma^2*(X.T.dot(X)).inverse
+           #v_cov = s2*npl.inv(X.T.dot(X))
+
+           T STATSITICS：
+           t_stat = beta_hat[0]/sp.sqrt(v_cov[0,0])
+
+           Get the p-value:
+           #from scipy.stats import t as t_dist
+           ltp = t_dist.cdf(t_stat, df)
+           p = 1-ltp
+
+3. Exercise 'Basic linear modeling'
+   run a simple regression on all voxels in a 4D FMRI image.
+   #1: load the nii data
+   #2: load the conv data
+   #3: complie the design matrix
+   #4: get beta
+
+4.HW1:Introduction to smoothing
+  HW2:Smoothing as convolution
+
+*************************That's what we've done so far~~**********************
