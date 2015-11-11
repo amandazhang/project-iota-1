@@ -54,8 +54,10 @@ Lecture 12   Correlation and Convolution ***
 Lecture 13  Using Convolution ****
 ----------------------------------
 1.Using pearson.py to do correlation per voxel (Lecture 11) in a faster way.
-2.A better regressor using convolution: Convolving w/ the hemodyamic response 
-function. 
+2.A better regressor using convolution: 
+  Convolving w/ the hemodyamic response function(HRF).
+  **It is a function that gives the predicted hemodynamic response at any given
+    time following an impulse at time 0.
   a)# Use of scify # implements of the gamma distribution
   b) Construct a hemodynamic response function (HRF) *****
      *************Implement*****************
@@ -101,7 +103,8 @@ Lecture 14  Linear Modeling ***
    plt.plot(voxel_time_course)
    plt.plot(y_hat)
 
-2. Exercise on running regression on all voxels in a 4D FMRI image.
+2. 'Basic linear modeling'
+   Exercise on running regression on all voxels in a 4D FMRI image.
    #some codes:
      # Reshape the 4D data to voxel by time 2D
      # Transpose to give time by voxel 2D
@@ -120,4 +123,13 @@ Lecture 14  Linear Modeling ***
      
 
 
+Lecture 15 Testing a single voxel
+-------------------------------------
+1. Matrix rank
+2. Testing a single voxel:
+   step 1: Modeling a single voxel time course.
+   step 2: compile a design for this time-course and estimate it.
+           #convolved = np.loadtxt('ds-conv.txt')[4:]
+           X = np.ones((len(convolved), 2)
+           X[:, 0] = convolved
 
