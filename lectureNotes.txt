@@ -1,3 +1,15 @@
+"""
+Notes:
+REPETITION TIME (TR) - 
+the amount of time that exists between successive pulse sequences applied to 
+the same slice. It is delineated by initiating the first RF pulse of the 
+sequence then repeating the same RF pulse at a time t. Variations in the value 
+of TR have an important effect on the control of image contrast characteristics.
+Short values of TR (< 1000 ms) are common in images exhibiting T1 contrast, and
+long values of TR (> 1500 ms) are common in images exhibiting T2 contrast. TR 
+is also a major factor in total scan time. See also TR.
+"""
+
 Lecture 9
 ------------
 1.Loading data from NifTi images.
